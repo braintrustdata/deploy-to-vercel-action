@@ -41196,6 +41196,8 @@ const init = () => {
 
     const output = await exec("vercel", commandArguments, WORKING_DIRECTORY);
 
+    core.info("Output frm assignAlias: ", output);
+
     return output;
   };
 
