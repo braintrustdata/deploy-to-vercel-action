@@ -63,6 +63,8 @@ const init = () => {
         `githubDeployment=1`,
       ];
 
+      core.info("Metadata: ", JSON.stringify(metadata));
+
       metadata.forEach((item) => {
         commandArguments = commandArguments.concat(["--meta", item]);
       });
@@ -76,8 +78,9 @@ const init = () => {
 
     core.info("Starting deploy with Vercel CLI");
     const output = await exec("vercel", commandArguments, WORKING_DIRECTORY);
+    core.info("Output from deploy: ", output);
     const parsed = output.match(/(?<=https?:\/\/)(.*)/g)[0];
-
+    core.info("Parsed deploymentUrl: ", parsed);
     if (!parsed) throw new Error("Could not parse deploymentUrl");
 
     deploymentUrl = parsed;
